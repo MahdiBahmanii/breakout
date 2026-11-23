@@ -37,6 +37,10 @@ public class paddle {
     public int getheight(){
         return height;
     }
+    public void reset_paddle(){
+        x=350;
+        y=545;
+    }
 
 
 }
