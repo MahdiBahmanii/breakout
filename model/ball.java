@@ -47,6 +47,17 @@ public class ball {
     public int getd(){
         return d;
     }
+    public void hitx(){
+        if (x<=0||x>=784) {
+            vx=-vx;
+        }
+    }
+    public void hity(){
+        if(y<=0){
+            vy=-vy;
+        }
+    }
+    
 
 
 
