@@ -32,19 +32,21 @@ public class brick {
     public boolean isactive(){
         return active;
     }
+    private double overlapX;
+    private double overlapY;
     public boolean check(double bx,double by,int d){
         if(width+x>bx && bx+d>x && by+d>y && y+height>by){
             double lrba=(double)bx+d;
             double lrbr=(double)x+width;
             double llba=(double)bx;
             double llbr=(double)x;
-            double overlapX=Math.min(lrba, lrbr)-Math.max(llba, llbr);
+            overlapX=Math.min(lrba, lrbr)-Math.max(llba, llbr);
             
             double lbba=(double)by;
             double lbbr=(double)y;
             double lpba=(double)by+d;
             double lpbr=(double)y+height;
-            double overlapY=Math.min(lpba, lpbr)-Math.max(lbba,lbbr);
+            overlapY=Math.min(lpba, lpbr)-Math.max(lbba,lbbr);
             
             
             
@@ -54,6 +56,12 @@ public class brick {
         else{
             return false;
         }
+    }
+        public double getoverlapX(){
+            return overlapX;
+        }
+        public double getoverlapY(){
+            return overlapY;
     }
 
 

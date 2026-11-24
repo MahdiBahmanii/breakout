@@ -2,6 +2,7 @@ package breakout.model;
 import breakout.config.constants;
 import java.util.Random;
 import java.lang.Math;
+import breakout.model.brick;
 public class ball {
     private double x;
     private double y;
@@ -54,6 +55,14 @@ public class ball {
     }
     public void hity(){
         if(y<=0){
+            vy=-vy;
+        }
+    }
+    public void sb_brick(double overlapX,double overlapY){
+        if(overlapX<overlapY){
+            vx=-vx;
+        }
+        if(overlapX>overlapY){
             vy=-vy;
         }
     }
