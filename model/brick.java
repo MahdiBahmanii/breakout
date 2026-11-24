@@ -33,7 +33,14 @@ public class brick {
     public boolean isactive(){
         return active;
     }
-
+    public boolean checkcollision(double bx,double by,int d){
+        if(width+x>bx&&bx+d>x&&by+d>y&&y+height>by){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 
 
 
