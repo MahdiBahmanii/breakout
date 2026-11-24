@@ -1,5 +1,4 @@
 package breakout.model;
-import  breakout.config.constants;
 public class brick {
     private int x;
     private int y;
@@ -34,9 +33,24 @@ public class brick {
         return active;
     }
     public boolean check(double bx,double by,int d){
-        if(width+x>bx&&bx+d>x&&by+d>y&&y+height>by){
+        if(width+x>bx && bx+d>x && by+d>y && y+height>by){
+            double lrba=(double)bx+d;
+            double lrbr=(double)x+width;
+            double llba=(double)bx;
+            double llbr=(double)x;
+            double overlapX=Math.min(lrba, lrbr)-Math.max(llba, llbr);
+            
+            double lbba=(double)by;
+            double lbbr=(double)y;
+            double lpba=(double)by+d;
+            double lpbr=(double)y+height;
+            double overlapY=Math.min(lpba, lpbr)-Math.max(lbba,lbbr);
+            
+            
+            
             return true;
-        }
+
+                }
         else{
             return false;
         }
