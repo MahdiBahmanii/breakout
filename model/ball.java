@@ -2,7 +2,7 @@ package breakout.model;
 import breakout.config.constants;
 import java.util.Random;
 import java.lang.Math;
-import breakout.model.brick;
+import breakout.model.paddle;
 public class ball {
     private double x;
     private double y;
@@ -65,6 +65,18 @@ public class ball {
         if(overlapX>overlapY){
             vy=-vy;
         }
+    }
+    public double paddle_offset(double paddleX, double paddleWidth) {
+        double ballCenter= x+d/2.0;
+        double paddleCenter= paddleX+paddleWidth/2.0;
+        double offset=(ballCenter-paddleCenter)/(paddleWidth/2.0);
+        offset=Math.max(-1.0,Math.min(1.0,offset));
+        return offset;
+    }
+    public void bounce_paddle(double offset) {
+        double theta= Math.toRadians(offset * 60.0);
+        vx = constants.BALL_SPEED*Math.sin(theta);
+        vy= -constants.BALL_SPEED * Math.cos(theta);
     }
     
 
