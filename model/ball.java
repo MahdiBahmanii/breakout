@@ -78,7 +78,9 @@ public class ball {
         vx = constants.BALL_SPEED*Math.sin(theta);
         vy= -constants.BALL_SPEED * Math.cos(theta);
     }
-    
+    public void place_above_paddle(double paddleY) {
+        y = paddleY - d;
+    }
 
 
 
