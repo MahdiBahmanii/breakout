@@ -41,6 +41,13 @@ public class paddle {
         x=350;
         y=545;
     }
-
+public boolean paddle_hit(double bx, double by, int d) {
+    if (x + width > bx && bx + d > x &&
+        by + d > y && y + height > by) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 }
