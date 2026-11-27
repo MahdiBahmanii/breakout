@@ -14,7 +14,7 @@ public class view extends JPanel {
     game_engine g = new game_engine();
     JFrame frame = new JFrame("breakout");
     public void w(){
-    setBackground(Color.DARK_GRAY); 
+    setBackground(new Color(15,18,35)); 
     setPreferredSize(new Dimension(800, 600));
     }
     public void v(){
@@ -26,32 +26,69 @@ public class view extends JPanel {
         frame.setVisible(true);
     }
 
-    @Override
-    protected void paintComponent(Graphics gg) {
-        super.paintComponent(gg);
+@Override
+protected void paintComponent(Graphics gg) {
+    super.paintComponent(gg);
 
-        paddle p = g.getPaddle();
-        gg.setColor(Color.WHITE);
-        gg.fillRect(p.getX(), p.getY(), p.getwidth(), p.getheight());
+    Graphics2D g2 = (Graphics2D) gg;
+    g2.setRenderingHint(
+        RenderingHints.KEY_ANTIALIASING,
+        RenderingHints.VALUE_ANTIALIAS_ON
+    );
 
-        ball b = g.getBall();
-        gg.setColor(Color.WHITE);
-        gg.fillOval((int)b.getX(), (int)b.getY(), b.getd(), b.getd());
-    
-        bricks bs = g.getBricks();
-        brick[][] arr = bs.getBricks();
+    // Paddle
+    paddle p = g.getPaddle();
+    g2.setColor(new Color(70, 170, 255));
+    g2.fillRoundRect(
+        p.getX(), p.getY(),
+        p.getwidth(), p.getheight(),
+        12, 12
+    );
 
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 8; j++) {
-                brick br = arr[i][j];
+    // Ball
+    ball b = g.getBall();
+    g2.setColor(new Color(240, 245, 255));
+    g2.fillOval(
+        (int) b.getX(), (int) b.getY(),
+        b.getd(), b.getd()
+    );
 
-                if (br.isactive()) {
-                    gg.setColor(Color.RED);
-                    gg.fillRect(br.getx(), br.gety(), br.getwidth(), br.getheight());
-                }
+    // Bricks
+    bricks bs = g.getBricks();
+    brick[][] arr = bs.getBricks();
+
+    Color[] brickColors = {
+        new Color(255, 90, 95),
+        new Color(255, 160, 70),
+        new Color(255, 215, 80),
+        new Color(80, 220, 160),
+        new Color(90, 160, 255)
+    };
+
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 8; j++) {
+            brick br = arr[i][j];
+
+            if (br.isactive()) {
+                g2.setColor(brickColors[i]);
+
+                g2.fillRoundRect(
+                    br.getx(), br.gety(),
+                    br.getwidth(), br.getheight(),
+                    8, 8
+                );
+
+                // Highlight on top
+                g2.setColor(new Color(255, 255, 255, 55));
+                g2.drawRoundRect(
+                    br.getx() + 1, br.gety() + 1,
+                    br.getwidth() - 2, br.getheight() - 2,
+                    8, 8
+                );
             }
         }
     }
+}
 
 
 }
