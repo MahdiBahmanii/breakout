@@ -81,7 +81,10 @@ public class ball {
     public void place_above_paddle(double paddleY) {
         y = paddleY - d;
     }
-
+    public void place_on_paddle(int paddleX, int paddleY, int paddleWidth) {
+        x= paddleX+(paddleWidth-d)/2.0;
+        y= paddleY-d;
+    }
 
 
 

@@ -5,12 +5,15 @@ import breakout.model.ball;
 import breakout.model.brick;
 import breakout.model.bricks;
 import breakout.model.paddle;
-
+import javax.swing.Timer;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+import javax.swing.KeyStroke;
+import javax.swing.AbstractAction;
 import breakout.controller.game_engine;
+
 public class view extends JPanel {
+    Timer timer;
     game_engine g = new game_engine();
     JFrame frame = new JFrame("breakout");
     public void w(){
@@ -20,9 +23,42 @@ public class view extends JPanel {
     public void v(){
         this.w();
         frame.add(this);
+
+        getInputMap().put(KeyStroke.getKeyStroke("LEFT"), "left");
+        getInputMap().put(KeyStroke.getKeyStroke("RIGHT"), "right");
+
+        getActionMap().put("left", new AbstractAction() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                g.getPaddle().move_left();
+                repaint();
+            }
+        });
+
+        getActionMap().put("right", new AbstractAction() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                g.getPaddle().move_right();
+                repaint();
+            }
+        });
+        getInputMap().put(KeyStroke.getKeyStroke("SPACE"), "launch");
+
+        getActionMap().put("launch", new AbstractAction() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                g.launch_ball();
+            }
+        });
+        
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
+        timer = new Timer(16, e -> {
+            g.update();
+            repaint();
+            });
+        timer.start();
         frame.setVisible(true);
     }
 

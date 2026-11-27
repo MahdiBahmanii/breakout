@@ -71,6 +71,9 @@ public class game_engine {
     public bricks getBricks(){
         return bricks;
     }
+    public void launch_ball(){
+        ball.launch();
+    }
     
 }
 
